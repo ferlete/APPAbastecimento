@@ -1,0 +1,40 @@
+version: "3"
+services:
+  mysql:
+    #image: mysql:5.7.26
+    image: mariadb:10.3
+    container_name: "server-Mysql"
+    volumes:
+      - .docker/db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    expose:
+     - 3306
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    networks:
+      - mynetwork
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "server-phpmyadmin"
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    links:
+       - mysql
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

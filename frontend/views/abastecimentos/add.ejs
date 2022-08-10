@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Adicionar Abastecimento</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="container" style="margin-top: 50px;">
+
+	<% if (messages.error) { %>
+	<div class="alert alert-danger" role="alert"><%- messages.error %></div>
+	<% } %>
+
+    <div class="card">
+    	<div class="card-header">
+			Adicionar Abastecimento
+		</div>
+        <div class="card-body">
+            <form action="/abastecimentos/add" method="post">
+
+                <div class="form-group">
+                    <label>Placa:</label>
+                    <input type="text" class="form-control" name="placa" value="" autocomplete="off" onchange="onchangePlaca()">
+                </div>
+                <div class="form-group">
+                    <label>KM Atual:</label>
+                    <input type="text" class="form-control" name="hodometro" value="" autocomplete="off">
+                </div>
+								<div class="form-group">
+                    <label>Valor Abastecimento:</label>
+                    <input type="text" class="form-control" name="valor_abastecimento" value="" autocomplete="off">
+                </div>
+								<div class="form-group">
+										<label>Qtde Litro:</label>
+										<input type="text" class="form-control" name="volume" value="" autocomplete="off">
+								</div>
+								<div class="form-group">
+										<label>CNPJ Posto:</label>
+										<input type="text" class="form-control" name="CNPJ" value="" autocomplete="off">
+								</div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-info" value="Adicionar Abastecimento"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
