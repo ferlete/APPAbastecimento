@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment')
 var dbConn  = require('../lib/db');
 
 // display abastecimentos page
@@ -23,27 +24,46 @@ router.get('/', function(req, res, next) {
 router.get('/add', function(req, res, next) {
     // render to add.ejs
     res.render('abastecimentos/add', {
-        name: '',
-        author: ''
+        data: '',
+        volume: '',
+        hodometro: '',
+        valor_litro: '',
+        veiculo_id : '',
+        posto_id : ''
     })
 })
 
 // add a new abastecimentos
 router.post('/add', function(req, res, next) {
 
-    let name = req.body.name;
-    let author = req.body.author;
+    //let data = req.body.data;
+    let data =  moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+    let volume = req.body.volume;
+    let hodometro = req.body.hodometro;
+
+    //fazer calculo de valor por litro
+    let valor_litro = req.body.valor_abastecimento/ req.body.volume;
+    let veiculo_id = req.body.veiculo_id;
+    let posto_id = req.body.posto_id;
+
     let errors = false;
 
-    if(name.length === 0 || author.length === 0) {
+    if(veiculo_id.length === 0 || posto_id.length === 0) {
         errors = true;
 
         // set flash message
-        req.flash('error', "Please enter name and author");
+        req.flash('error', "Informe Veiculo e Posto");
         // render to add.ejs with flash message
         res.render('abastecimentos/add', {
-            name: name,
-            author: author
+            //data: data,
+            data: Date.now(),
+            volume: volume,
+            hodometro: hodometro,
+            valor_litro: valor_litro,
+            veiculo_id: veiculo_id,
+            posto_id: posto_id
+
+
         })
     }
 
@@ -51,8 +71,12 @@ router.post('/add', function(req, res, next) {
     if(!errors) {
 
         var form_data = {
-            name: name,
-            author: author
+          data: data,
+          volume: volume,
+          hodometro: hodometro,
+          valor_litro: valor_litro,
+          veiculo_id: veiculo_id,
+          posto_id: posto_id
         }
 
         // insert query
@@ -63,11 +87,15 @@ router.post('/add', function(req, res, next) {
 
                 // render to add.ejs
                 res.render('abastecimentos/add', {
-                    name: form_data.name,
-                    author: form_data.author
+                    data: form_data.data,
+                    volume: form_data.volume,
+                    hodometro: form_data.hodometro,
+                    valor_litro: form_data.valor_litro,
+                    veiculo_id: form_data.veiculo_id,
+                    posto_id: form_data.posto_id
                 })
             } else {
-                req.flash('success', 'Abastecimento successfully added');
+                req.flash('success', 'Abastecimento incluido com sucesso');
                 res.redirect('/abastecimentos');
             }
         })
@@ -84,17 +112,20 @@ router.get('/edit/(:id)', function(req, res, next) {
 
         // if user not found
         if (rows.length <= 0) {
-            req.flash('error', 'Abastecimento not found with id = ' + id)
+            req.flash('error', 'Abastecimento nao encontrado com id = ' + id)
             res.redirect('/abastecimentos')
         }
         // if abastecimento found
         else {
             // render to edit.ejs
             res.render('abastecimentos/edit', {
-                title: 'Edit Book',
-                id: rows[0].id,
-                name: rows[0].name,
-                author: rows[0].author
+              data: rows[0].data,
+              volume: rows[0].volume,
+              hodometro: rows[0].hodometro,
+              valor_litro: rows[0].valor_litro,
+              veiculo_id: rows[0].veiculo_id,
+              posto_id: rows[0].posto_id
+
             })
         }
     })
@@ -104,20 +135,29 @@ router.get('/edit/(:id)', function(req, res, next) {
 router.post('/update/:id', function(req, res, next) {
 
     let id = req.params.id;
-    let name = req.body.name;
-    let author = req.body.author;
+    let data = req.body.data;
+    let volume = req.body.volume;
+    let hodometro = req.body.hodometro;
+    let valor_litro = req.body.valor_litro;
+    let veiculo_id = req.body.veiculo_id;
+    let posto_id = req.body.posto_id;
+
     let errors = false;
 
-    if(name.length === 0 || author.length === 0) {
+    if(veiculo_id.length === 0 || posto_id.length === 0) {
         errors = true;
 
         // set flash message
-        req.flash('error', "Please enter name and author");
+        req.flash('error', "Informe o Veiculo e Posto");
         // render to add.ejs with flash message
         res.render('abastecimentos/edit', {
             id: req.params.id,
-            name: name,
-            author: author
+            data: data,
+            volume: volume,
+            hodometro: hodometro,
+            valor_litro: valor_litro,
+            veiculo_id: veiculo_id,
+            posto_id: posto_id
         })
     }
 
@@ -125,8 +165,12 @@ router.post('/update/:id', function(req, res, next) {
     if( !errors ) {
 
         var form_data = {
-            name: name,
-            author: author
+          data: data,
+          volume: volume,
+          hodometro: hodometro,
+          valor_litro: valor_litro,
+          veiculo_id: veiculo_id,
+          posto_id: posto_id
         }
         // update query
         dbConn.query('UPDATE lancamento_abastecimento SET ? WHERE id = ' + id, form_data, function(err, result) {
@@ -137,11 +181,15 @@ router.post('/update/:id', function(req, res, next) {
                 // render to edit.ejs
                 res.render('abastecimentos/edit', {
                     id: req.params.id,
-                    name: form_data.name,
-                    author: form_data.author
+                    data: form_data.data,
+                    volume: form_data.volume,
+                    hodometro: form_data.hodometro,
+                    valor_litro: form_data.valor_litro,
+                    veiculo_id: form_data.veiculo_id,
+                    posto_id: form_data.posto_id
                 })
             } else {
-                req.flash('success', 'abastecimento successfully updated');
+                req.flash('success', 'Abastecimento Atualizado com Sucesso');
                 res.redirect('/abastecimentos');
             }
         })
