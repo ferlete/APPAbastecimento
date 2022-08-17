@@ -32,7 +32,7 @@ Veiculo.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found veiculo: ", res[0]);
+      console.log("found veiculo id: ", res[0].id);
       result(null, res[0]);
       return;
     }
@@ -56,7 +56,7 @@ Veiculo.getAll = (placa, result) => {
       return;
     }
 
-    console.log("veiculos: ", res);
+    console.log("Listagem de veículos realizada");
     result(null, res);
   });
 };

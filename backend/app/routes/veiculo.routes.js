@@ -18,5 +18,5 @@ module.exports = app => {
   // Excluir Veiculo por id
   router.delete("/:id", veiculos.delete);
 
-  app.use('/api/veiculos', router);
+  app.use('/veiculos', router);
 };

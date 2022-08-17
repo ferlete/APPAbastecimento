@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Helvetica&family=PT+Sans&display=swap');
+body {
+    padding: 50px;
+    font: 14px "Helvetica", Helvetica, Arial, sans-serif;
+  }
+  
+  a {
+    color: #00B7FF;
+  }
+  

@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/css/style.css' />
+</head>
+
+<body>
+  <!--  header -->
+  <%- include('include/_header') %>
+    <!-- /header -->
+
+
     <img alt="Logo" src="images/logo.png">
     <p>Web APP Abastecimento</p>
     <ul>
       <li><a href="/abastecimentos"> Gestão de Abastecimentos </a></li>
-      <li><a href="/veiculos"> Gestão de Veiculos </a></li>
+      <li><a href="/veiculos"> Gestão de Veículos </a></li>
       <li><a href="/marcas"> Gestão de Marcas </a></li>
     </ul>
 
-  </body>
+
+    <!-- footer -->
+    <%- include('include/_footer') %>
+      <!-- /footer -->
+
+</body>
+
 </html>

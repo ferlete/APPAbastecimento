@@ -1,56 +1,60 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Editar Veiculo</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
+
 <body class="container" style="margin-top: 50px;">
 
-	<% if (messages.error) { %>
-	<div class="alert alert-danger" role="alert"><%- messages.error %></div>
-	<% } %>
-
-    <div class="card">
-    	<div class="card-header">
+	<div class="card">
+		<div class="card-header">
 			Alterar Veiculo
 		</div>
-        <div class="card-body">
-            <form action="/veiculos/update/<%= id %>" method="post">
-								<div class="form-group">
-										<label>Placa:</label>
-										<input type="text" class="form-control" name="placa" value="<%= placa %>" autocomplete="off">
-								</div>
-								<div class="form-group">
-										<label>Volume Rerservatorio:</label>
-										<input type="text" class="form-control" name="volume_reservatorio" value="<%= volume_reservatorio %>" autocomplete="off">
-								</div>
-								<div class="form-group">
-										<label>Ano de Fabricação:</label>
-										<input type="text" class="form-control" name="ano_fabricacao" value="<%= ano_fabricacao %>" autocomplete="off">
-								</div>
-								<div class="form-group">
-										<label>Ano Modelo:</label>
-										<input type="text" class="form-control" name="ano_modelo" value="<%= ano_modelo %>" autocomplete="off">
-								</div>
+		<div class="card-body">
+			<form action="/veiculos/update/<%= data.id %>" method="post">
+				<div class="form-group">
+					<label>Placa:</label>
+					<input type="text" class="form-control" name="placa" value="<%= data.placa %>" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label>Volume Rerservatorio:</label>
+					<input type="text" class="form-control" name="volume_reservatorio"
+						value="<%= data.volume_reservatorio %>" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label>Ano de Fabricação:</label>
+					<input type="text" class="form-control" name="ano_fabricacao" value="<%= data.ano_fabricacao %>"
+						autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label>Ano Modelo:</label>
+					<input type="text" class="form-control" name="ano_modelo" value="<%= data.ano_modelo %>"
+						autocomplete="off">
+				</div>
 
-								<div class="form-group">
-										<label>hodometro inicial:</label>
-										<input type="text" class="form-control" name="hodometro_inicial" value="<%= hodometro_inicial %>" autocomplete="off">
-								</div>
+				<div class="form-group">
+					<label>hodometro inicial:</label>
+					<input type="text" class="form-control" name="hodometro_inicial" value="<%= data.hodometro_inicial %>"
+						autocomplete="off">
+				</div>
 
-								<div class="form-group">
-										<label>Modelo:</label>
-										<input type="text" class="form-control" name="modelo_veiculo_id" value="<%= modelo_veiculo_id %>" autocomplete="off">
-								</div>
+				<div class="form-group">
+					<label>Modelo:</label>
+					<input type="text" class="form-control" name="modelo_veiculo_id" value="<%= data.modelo_veiculo_id %>"
+						autocomplete="off">
+				</div>
 
-								<div class="form-group">
-                    <input type="submit" class="btn btn-info" value="Alterar"/>
-                </div>
-            </form>
-        </div>
-    </div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-info" value="Alterar" />
+				</div>
+			</form>
+		</div>
+	</div>
 
 </body>
+
 </html>
